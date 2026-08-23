@@ -49,7 +49,6 @@ class ScraperService:
             }
 
     def clean_soup_for_markdown(self, soup: BeautifulSoup) -> BeautifulSoup:
-        # Remove noisy tags
         for tag in soup(["script", "style", "noscript", "svg", "header", "footer", "nav", "aside", "form"]):
             tag.decompose()
         return soup
@@ -98,7 +97,6 @@ class ScraperService:
         }
 
     def extract_json_by_schema(self, text: str, soup: BeautifulSoup, schema: Dict[str, Any]) -> Dict[str, Any]:
-        # Simple intelligent heuristic extractor for common fields (title, currency, rank, price, summary)
         result = {}
         properties = schema.get("properties", {})
         title = soup.title.string.strip() if soup.title and soup.title.string else ""
@@ -119,7 +117,6 @@ class ScraperService:
                 price_match = re.search(r"(?:₹|\$)\s*[\d,]+(?:\.\d+)?", text)
                 result[prop_name] = price_match.group(0) if price_match else "N/A"
             else:
-                # Search for label in text
                 match = re.search(rf"{prop_name}[:\s]+([^\n\r]+)", text, re.IGNORECASE)
                 result[prop_name] = match.group(1).strip() if match else f"Extracted {prop_name}"
 
@@ -143,7 +140,6 @@ class ScraperService:
 
         links = self.extract_links(soup, final_url)
 
-        # Build clean markdown
         soup_clean = BeautifulSoup(raw_html, "html.parser")
         if only_main_content:
             soup_clean = self.clean_soup_for_markdown(soup_clean)
@@ -151,7 +147,6 @@ class ScraperService:
         main_element = soup_clean.find("main") or soup_clean.find("article") or soup_clean.find("body") or soup_clean
         html_str = str(main_element)
         markdown = md(html_str, heading_style="ATX", strip=["img"]).strip()
-        # Clean excessive blank lines
         markdown = re.sub(r"\n{3,}", "\n\n", markdown)
 
         plain_text = re.sub(r"\s+", " ", main_element.get_text(separator=" ")).strip()

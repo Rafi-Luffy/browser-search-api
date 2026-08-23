@@ -8,22 +8,18 @@ class Settings(BaseSettings):
     HOST: str = os.getenv("HOST", "0.0.0.0")
     PORT: int = int(os.getenv("PORT", "8000"))
 
-    # Auth configuration (Optional: if set, requires Bearer token; if empty, open for unlimited usage)
     API_KEY: str = os.getenv("CRW_API_KEY", os.getenv("API_KEY", ""))
     REQUIRE_AUTH: bool = os.getenv("REQUIRE_AUTH", "false").lower() in ("true", "1", "yes")
 
-    # Upstream SearXNG instance URL if available (optional)
     SEARXNG_URL: str = os.getenv("SEARXNG_URL", "")
 
-    # GitHub Search API token (optional, for higher rate limits)
     GITHUB_TOKEN: str = os.getenv("GITHUB_TOKEN", "")
 
-    # Max limits
     MAX_SEARCH_LIMIT: int = 50
     MAX_SCRAPE_CONCURRENCY: int = 20
     MAX_CRAWL_PAGES: int = 100
     MAX_CRAWL_DEPTH: int = 5
-    MAX_UPLOAD_BYTES: int = 52428800  # 50 MB
+    MAX_UPLOAD_BYTES: int = 52428800
 
     class Config:
         env_file = ".env"

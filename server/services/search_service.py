@@ -141,7 +141,6 @@ class SearchService:
         return results
 
     async def search_duckduckgo(self, query: str, limit: int = 5) -> List[Dict[str, Any]]:
-        # Try DDGS first
         try:
             res = await self.search_ddgs_library(query, limit=limit)
             if res:
@@ -149,7 +148,6 @@ class SearchService:
         except Exception:
             pass
 
-        # Fallback 1: DuckDuckGo HTML
         try:
             res = await self.search_duckduckgo_html(query, limit=limit)
             if res:
@@ -157,7 +155,6 @@ class SearchService:
         except Exception:
             pass
 
-        # Fallback 2: DuckDuckGo Lite
         try:
             res = await self.search_duckduckgo_lite(query, limit=limit)
             if res:
@@ -322,16 +319,13 @@ class SearchService:
                     seen_urls.add(url)
                     merged.append(item)
 
-        # Fallback if 0 results
         if not merged:
-            # Try Wikipedia fallback
             wiki_res = await self.search_wikipedia(query, limit=limit)
             for item in wiki_res:
                 if item["url"] not in seen_urls:
                     seen_urls.add(item["url"])
                     merged.append(item)
 
-        # Format output items with standard schema
         formatted = []
         for idx, item in enumerate(merged[:limit], 1):
             snippet = item.get("snippet", "")

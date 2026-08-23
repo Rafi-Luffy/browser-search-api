@@ -4,7 +4,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from main import api, demo
 
-# Sample minimal PDF binary
 pdf = (
     b"%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj\n"
     b"2 0 obj<</Type/Pages/Count 1/Kids[3 0 R]>>endobj\n"

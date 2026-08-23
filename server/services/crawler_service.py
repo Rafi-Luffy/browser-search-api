@@ -59,7 +59,6 @@ class CrawlerService:
                         job["completed"] = len(results)
                         job["data"] = results
 
-                    # If within depth limit, find next links
                     if depth < max_depth and len(results) + len(queue) < max_pages:
                         links = await scraper_service.map_links(current_url, limit=max_pages)
                         for link in links:

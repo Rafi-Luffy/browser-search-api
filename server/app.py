@@ -23,7 +23,6 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# CORS middleware for Next.js playground and external clients
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -36,7 +35,6 @@ app.add_middleware(
 
 @app.middleware("http")
 async def auth_middleware(request: Request, call_next):
-    # Public routes that never require authentication
     public_paths = [
         "/",
         "/health",
@@ -50,7 +48,6 @@ async def auth_middleware(request: Request, call_next):
     if path in public_paths or request.method == "OPTIONS":
         return await call_next(request)
 
-    # If auth requirement is active and an API key is set
     if settings.REQUIRE_AUTH and settings.API_KEY:
         auth_header = request.headers.get("Authorization")
         if not auth_header:
@@ -95,7 +92,6 @@ async def root():
     }
 
 
-# Include all endpoint routers
 app.include_router(health.router)
 app.include_router(capabilities.router)
 app.include_router(search.router)

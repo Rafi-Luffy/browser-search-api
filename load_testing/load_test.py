@@ -1,6 +1,3 @@
-# Measure request throughput and latency against a lightweight API endpoint.
-# Threads run until the duration or maximum-request limit is reached.
-
 import json
 import threading
 import time
@@ -14,26 +11,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import requests
 from main import API_URL, api
 
-# ==============================================================================
-# Load Test Configuration
-# ==============================================================================
-# API_URL is imported from main.py (respects CRW_API_URL / .env)
-
-# API endpoint to test (default to lightweight route)
 ENDPOINT = "/v1/capabilities"
-
-# Number of concurrent threads sending requests
 CONCURRENCY = 2
-
-# Duration limit in seconds
 DURATION_SECONDS = 10
-
-# Maximum number of total requests allowed across all threads
 MAX_REQUESTS = 200
-# ==============================================================================
 
 
-# Return the value at a percentile, or zero when no requests succeeded.
 def calculate_percentile(values, fraction):
     if not values:
         return 0.0
@@ -41,7 +24,6 @@ def calculate_percentile(values, fraction):
     return ordered[round((len(ordered) - 1) * fraction)]
 
 
-# Run the concurrent load test and print a compact result summary.
 def run():
     if not api.key:
         raise RuntimeError("Set CRW_API_KEY in .env before running load test.")
@@ -52,7 +34,6 @@ def run():
     completed = 0
     deadline = time.monotonic() + DURATION_SECONDS
 
-    # Reserve request slots and record either latency or a failure category.
     def send_request():
         nonlocal completed
         while time.monotonic() < deadline:
@@ -90,7 +71,6 @@ def run():
     succeeded = len(latencies)
     failed = sum(failures.values())
 
-    # A dictionary makes the report easy to print, save, or send elsewhere.
     summary = {
         "endpoint": ENDPOINT,
         "concurrency": CONCURRENCY,

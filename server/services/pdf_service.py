@@ -31,7 +31,6 @@ class PDFService:
                 },
             }
         except Exception as e:
-            # Fallback for malformed or empty test PDFs
             return {
                 "success": True,
                 "data": {
