@@ -40,7 +40,7 @@ class BrowserAPI:
     # Let requests build the multipart body for PDF uploads.
     def parse_pdf(self, pdf, filename="document.pdf", timeout=30):
         response = requests.post(
-            f"{API_URL}/v2/parse",
+            f"{API_URL}/v1/parse",
             files={"file": (filename, pdf, "application/pdf")},
             headers={"Authorization": f"Bearer {self.key}"},
             timeout=timeout,

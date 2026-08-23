@@ -23,18 +23,9 @@ class BatchScrapeRequest(BaseModel):
 
 
 @router.post("/v1/scrape")
-async def v1_scrape(req: ScrapeRequest):
-    return await scraper_service.scrape(
-        url=req.url,
-        formats=req.formats,
-        only_main_content=req.onlyMainContent if req.onlyMainContent is not None else True,
-        json_schema=req.jsonSchema,
-        timeout=req.timeout or 30.0,
-    )
-
-
+@router.post("/scrape")
 @router.post("/v2/scrape")
-async def v2_scrape(req: ScrapeRequest):
+async def scrape_endpoint(req: ScrapeRequest):
     return await scraper_service.scrape(
         url=req.url,
         formats=req.formats,
@@ -44,8 +35,12 @@ async def v2_scrape(req: ScrapeRequest):
     )
 
 
+@router.post("/v1/batch/scrape")
+@router.post("/v1/batch-scrape")
+@router.post("/batch/scrape")
+@router.post("/batch-scrape")
 @router.post("/v2/batch/scrape")
-async def v2_batch_scrape(req: BatchScrapeRequest):
+async def batch_scrape_endpoint(req: BatchScrapeRequest):
     return await scraper_service.batch_scrape(
         urls=req.urls,
         formats=req.formats,

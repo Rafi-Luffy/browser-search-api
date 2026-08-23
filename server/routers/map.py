@@ -14,19 +14,9 @@ class MapRequest(BaseModel):
 
 
 @router.post("/v1/map")
-async def v1_map(req: MapRequest):
-    links = await scraper_service.map_links(url=req.url, search=req.search, limit=req.limit or 100)
-    return {
-        "success": True,
-        "data": {
-            "links": links,
-            "total": len(links),
-        },
-    }
-
-
+@router.post("/map")
 @router.post("/v2/map")
-async def v2_map(req: MapRequest):
+async def map_endpoint(req: MapRequest):
     links = await scraper_service.map_links(url=req.url, search=req.search, limit=req.limit or 100)
     return {
         "success": True,

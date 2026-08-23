@@ -14,6 +14,8 @@ class DiffRequest(BaseModel):
 
 
 @router.post("/v1/change-tracking/diff")
+@router.post("/v1/diff")
+@router.post("/diff")
 async def change_tracking_diff(req: DiffRequest):
     return diff_service.compute_diff(
         previous=req.previous,

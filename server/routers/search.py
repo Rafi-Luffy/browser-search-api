@@ -61,27 +61,22 @@ async def _perform_search_and_optional_scrape(req: SearchRequest) -> List[Dict[s
     return results
 
 
-@router.post("/v1/search")
-async def v1_search(req: SearchRequest):
-    results = await _perform_search_and_optional_scrape(req)
+def _build_search_response(query: str, results: List[Dict[str, Any]]) -> Dict[str, Any]:
     return {
         "success": True,
         "data": {
-            "query": req.query,
+            "query": query,
             "results": results,
-            "totalResults": len(results),
-        },
-    }
-
-
-@router.post("/v2/search")
-async def v2_search(req: SearchRequest):
-    results = await _perform_search_and_optional_scrape(req)
-    return {
-        "success": True,
-        "data": {
-            "query": req.query,
             "web": results,
+            "totalResults": len(results),
             "total": len(results),
         },
     }
+
+
+@router.post("/v1/search")
+@router.post("/search")
+@router.post("/v2/search")
+async def search_endpoint(req: SearchRequest):
+    results = await _perform_search_and_optional_scrape(req)
+    return _build_search_response(req.query, results)

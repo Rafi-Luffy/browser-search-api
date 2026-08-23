@@ -5,6 +5,7 @@ router = APIRouter(tags=["Capabilities"])
 
 
 @router.get("/v1/capabilities")
+@router.get("/capabilities")
 async def capabilities():
     return {
         "success": True,
