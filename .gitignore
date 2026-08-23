@@ -1,0 +1,26 @@
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Environment files
+.env
+!.env.example
+
+# Outputs & temporary test logs
+outputs/
+*.log
+
+# Node & Next.js (Playground)
+playground/node_modules/
+playground/.next/
+playground/out/
+.DS_Store

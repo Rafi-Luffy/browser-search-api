@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="600" viewBox="0 0 1020 600" role="img" aria-labelledby="title desc">
+  <title id="title">CRW capabilities endpoint throughput with ultra-safe target</title>
+  <desc id="desc">Successful requests per second at concurrency 1, 4, 8, 16, 20, 32, and 64. A green dashed line marks the 50 RPS ultra-safe target. A 15-second 20-concurrency run reached 47.94 RPS without failures.</desc>
+  <rect width="1020" height="600" fill="#0d1117"/>
+  <text x="70" y="55" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="25" font-weight="bold">CRW API throughput — /v1/capabilities</text>
+  <text x="70" y="82" fill="#8b949e" font-family="Arial, sans-serif" font-size="15">Authenticated lightweight endpoint • higher is better • green line = ultra-safe target</text>
+  <g stroke="#30363d" stroke-width="1">
+    <line x1="90" y1="470" x2="960" y2="470"/><line x1="90" y1="390" x2="960" y2="390"/>
+    <line x1="90" y1="310" x2="960" y2="310"/><line x1="90" y1="230" x2="960" y2="230"/>
+    <line x1="90" y1="150" x2="960" y2="150"/><line x1="90" y1="70" x2="960" y2="70"/>
+  </g>
+  <g fill="#8b949e" font-family="Arial, sans-serif" font-size="14" text-anchor="end">
+    <text x="80" y="475">0</text><text x="80" y="395">25</text><text x="80" y="315">50</text>
+    <text x="80" y="235">75</text><text x="80" y="155">100</text><text x="80" y="75">125 RPS</text>
+  </g>
+  <line x1="90" y1="310" x2="960" y2="310" stroke="#3fb950" stroke-width="3" stroke-dasharray="9 7"/>
+  <text x="105" y="302" fill="#3fb950" font-family="Arial, sans-serif" font-size="15">Ultra-safe target: 50 RPS</text>
+  <g fill="#58a6ff">
+    <rect x="120" y="463.5" width="68" height="6.5" rx="4"/><rect x="240" y="438.3" width="68" height="31.7" rx="4"/>
+    <rect x="360" y="405.3" width="68" height="64.7" rx="4"/><rect x="480" y="345.3" width="68" height="124.7" rx="4"/>
+    <rect x="600" y="316.6" width="68" height="153.4" rx="4"/><rect x="720" y="215.7" width="68" height="254.3" rx="4"/>
+    <rect x="840" y="134.3" width="68" height="335.7" rx="4"/>
+  </g>
+  <g fill="#f0f6fc" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle">
+    <text x="154" y="452">2.04</text><text x="274" y="427">9.90</text><text x="394" y="394">20.23</text>
+    <text x="514" y="334">38.98</text><text x="634" y="305">47.94</text><text x="754" y="204">79.48</text><text x="874" y="123">104.91</text>
+  </g>
+  <g fill="#c9d1d9" font-family="Arial, sans-serif" font-size="15" text-anchor="middle">
+    <text x="154" y="500">1</text><text x="274" y="500">4</text><text x="394" y="500">8</text><text x="514" y="500">16</text>
+    <text x="634" y="500">20</text><text x="754" y="500">32</text><text x="874" y="500">64</text>
+  </g>
+  <text x="525" y="540" fill="#8b949e" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Client concurrency</text>
+  <text x="70" y="568" fill="#c9d1d9" font-family="Arial, sans-serif" font-size="14">The 20-concurrency run sustained 47.94 RPS for 15s with 0 failures (p95 619ms).</text>
+  <text x="70" y="588" fill="#c9d1d9" font-family="Arial, sans-serif" font-size="14">Keep production workloads at or below 50 RPS until longer tests confirm more.</text>
+</svg>
