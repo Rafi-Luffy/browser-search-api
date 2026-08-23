@@ -3,28 +3,28 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115%2B-009688.svg)](https://fastapi.tiangolo.com)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://www.docker.com/)
-[![Railway](https://img.shields.io/badge/Deployed%20on-Railway-0B0D0E.svg)](https://browser-search-api-production.up.railway.app)
+[![Render](https://img.shields.io/badge/Deployed%20on-Render-46E3B7.svg)](https://browser-search-api-jpf1.onrender.com)
 
 A high-performance, universal **Web Search and Browser API backend and Python SDK**. Built to execute unlimited web searches across the entire internet, scrape clean Markdown/HTML, map sites, run background crawls, parse PDFs, and expose an **MCP (Model Context Protocol)** server for AI coding agents.
 
-**Live Deployed Endpoint** · `https://browser-search-api-production.up.railway.app`  
+**Live Deployed Endpoint** · `https://browser-search-api-jpf1.onrender.com`  
 **GitHub Repository** · `https://github.com/Rafi-Luffy/browser-search-api`  
-**MCP Server** · `https://browser-search-api-production.up.railway.app/mcp`  
-**Interactive Swagger Docs** · `https://browser-search-api-production.up.railway.app/docs`
+**MCP Server** · `https://browser-search-api-jpf1.onrender.com/mcp`  
+**Interactive Swagger Docs** · `https://browser-search-api-jpf1.onrender.com/docs`
 
 ---
 
 ## Features
 
-- 🌐 **Universal Multi-Engine Search**: Search the entire internet using DuckDuckGo, SearXNG, Google, Bing, Wikipedia, Reddit, and GitHub. Supports `site:` domain filters, deduplication, and optional inline Markdown scraping.
-- ⚡ **High-Speed Web Scraping**: Clean Markdown conversion (stripping ads, scripts, and clutter), HTML extraction, outgoing links discovery, and structured JSON Schema extraction.
-- 📦 **Batch Multi-URL Scraping**: Scrape dozens or hundreds of URLs concurrently with asynchronous workers (`POST /v1/batch/scrape`).
-- 🗺️ **Sitemap & Link Mapping**: Discover all links and site tree hierarchy from any URL (`POST /v1/map`).
-- 🕷️ **Asynchronous Web Crawler**: Job-based recursive crawling with max depth and page limits, status polling, and cancellation (`POST /v1/crawl`).
-- 📊 **Change Tracking & Diffs**: Detect text, content, and price modifications between snapshots using Git-style unified diffs or JSON diffs (`POST /v1/change-tracking/diff`).
-- 📄 **PDF Document Parsing**: Extract structured text and Markdown from uploaded PDF documents (`POST /v1/parse`).
-- 🤖 **Built-in MCP Server**: Native Model Context Protocol support (`/mcp`) for direct integration with **Claude Code**, **Cursor**, **Codex**, and **Antigravity**.
-- 🚀 **Deployed on Railway**: Active and live container on Railway.
+- **Universal Multi-Engine Search**: Search the entire internet using DuckDuckGo, SearXNG, Google, Bing, Wikipedia, Reddit, and GitHub. Supports `site:` domain filters, deduplication, and optional inline Markdown scraping.
+- **High-Speed Web Scraping**: Clean Markdown conversion (stripping ads, scripts, and clutter), HTML extraction, outgoing links discovery, and structured JSON Schema extraction.
+- **Batch Multi-URL Scraping**: Scrape dozens or hundreds of URLs concurrently with asynchronous workers (`POST /v1/batch/scrape`).
+- **Sitemap & Link Mapping**: Discover all links and site tree hierarchy from any URL (`POST /v1/map`).
+- **Asynchronous Web Crawler**: Job-based recursive crawling with max depth and page limits, status polling, and cancellation (`POST /v1/crawl`).
+- **Change Tracking & Diffs**: Detect text, content, and price modifications between snapshots using Git-style unified diffs or JSON diffs (`POST /v1/change-tracking/diff`).
+- **PDF Document Parsing**: Extract structured text and Markdown from uploaded PDF documents (`POST /v1/parse`).
+- **Built-in MCP Server**: Native Model Context Protocol support (`/mcp`) for direct integration with Claude Code, Cursor, Codex, and Antigravity.
+- **Deployed on Render**: Active and live container on Render free tier.
 
 ---
 
@@ -61,11 +61,11 @@ pip install -r requirements.txt
 
 ### 2. Configure Environment
 
-Create `.env` to point to the live Railway deployment or your local instance:
+Create `.env` to point to the live Render deployment or your local instance:
 
 ```dotenv
-# Point to live Railway endpoint:
-CRW_API_URL=https://browser-search-api-production.up.railway.app
+# Point to live Render endpoint:
+CRW_API_URL=https://browser-search-api-jpf1.onrender.com
 ```
 
 ---
@@ -101,12 +101,12 @@ print(page["data"]["markdown"][:500])
 
 ## Model Context Protocol (MCP) Integration
 
-Connect your AI coding agents directly to your deployed endpoint:
+Connect your coding agents directly to your deployed endpoint:
 
 ### Claude Code
 
 ```bash
-claude mcp add --transport http websearch https://browser-search-api-production.up.railway.app/mcp
+claude mcp add --transport http websearch https://browser-search-api-jpf1.onrender.com/mcp
 ```
 
 ### Cursor & Codex
@@ -115,7 +115,7 @@ Configure in `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.websearch]
-url = "https://browser-search-api-production.up.railway.app/mcp"
+url = "https://browser-search-api-jpf1.onrender.com/mcp"
 ```
 
 ---
