@@ -90,7 +90,7 @@ class SearchService:
                     a_tag = result_div.find("a", class_="result__a") or result_div.find("a", class_="result__snippet")
                     if not a_tag:
                         continue
-                    raw_href = a_tag.get("href", "")
+                    raw_href = str(a_tag.get("href", ""))
                     url = unwrap_redirect_url(raw_href)
                     if not url or not url.startswith("http"):
                         continue
@@ -121,7 +121,7 @@ class SearchService:
                 for i, row in enumerate(rows):
                     link = row.find("a", class_="result-link")
                     if link:
-                        raw_href = link.get("href", "")
+                        raw_href = str(link.get("href", ""))
                         url = unwrap_redirect_url(raw_href)
                         title = link.get_text().strip()
                         snippet = ""

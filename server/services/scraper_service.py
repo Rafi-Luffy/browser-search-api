@@ -58,7 +58,7 @@ class ScraperService:
         links = []
         seen = set()
         for a in soup.find_all("a", href=True):
-            href = a["href"].strip()
+            href = str(a["href"]).strip()
             if href.startswith("#") or href.startswith("javascript:") or href.startswith("mailto:"):
                 continue
             absolute_url = urllib.parse.urljoin(base_url, href)
@@ -71,18 +71,20 @@ class ScraperService:
         title = ""
         if soup.title and soup.title.string:
             title = soup.title.string.strip()
-        elif soup.find("meta", property="og:title"):
-            title = soup.find("meta", property="og:title").get("content", "").strip()
+        else:
+            og_title = soup.find("meta", property="og:title")
+            if og_title:
+                title = str(og_title.get("content", "")).strip()
 
         description = ""
         meta_desc = soup.find("meta", attrs={"name": "description"}) or soup.find("meta", property="og:description")
         if meta_desc:
-            description = meta_desc.get("content", "").strip()
+            description = str(meta_desc.get("content", "")).strip()
 
         og_image = ""
         meta_img = soup.find("meta", property="og:image")
         if meta_img:
-            og_image = meta_img.get("content", "").strip()
+            og_image = str(meta_img.get("content", "")).strip()
 
         language = soup.html.get("lang", "en") if soup.html else "en"
 
